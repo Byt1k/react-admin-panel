@@ -13,12 +13,12 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import {Link} from "react-router-dom";
-import {DarkModeContext} from "../../context/darkModeContext";
-import {actionsDarkMode} from "../../context/darkModeReducer";
+import {Context} from "../../context/context";
+import {actionsContext} from "../../context/reducer";
 
 export const Sidebar = () => {
     // @ts-ignore
-    const {dispatch} = useContext(DarkModeContext)
+    const {dispatch} = useContext(Context)
 
     return (
         <div className='sidebar'>
@@ -91,8 +91,8 @@ export const Sidebar = () => {
                 </ul>
             </div>
             <div className='bottom'>
-                <div className="colorOption" onClick={() => dispatch(actionsDarkMode.setLightMode())} />
-                <div className="colorOption" onClick={() => dispatch(actionsDarkMode.setDarkMode())} />
+                <div className="colorOption" onClick={() => dispatch(actionsContext.setLightMode())} />
+                <div className="colorOption" onClick={() => dispatch(actionsContext.setDarkMode())} />
             </div>
         </div>
     )

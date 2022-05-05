@@ -7,11 +7,11 @@ import {Single} from "./pages/single/Single";
 import {New} from "./pages/new/New";
 import {productInputs, userInputs} from "./formSource";
 import './style/dark.scss'
-import {DarkModeContext} from "./context/darkModeContext";
+import {Context} from "./context/context";
 
 function App() {
     // @ts-ignore
-    const {darkMode} = useContext(DarkModeContext)
+    const {darkMode} = useContext(Context)
 
     return (
         <div className={darkMode ? 'app dark' : 'app'}>

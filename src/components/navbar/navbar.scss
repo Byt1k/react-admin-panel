@@ -37,15 +37,9 @@
       .item {
         display: flex;
         align-items: center;
+        justify-content: center;
         margin-right: 20px;
         position: relative;
-
-        .colorMode {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-        }
 
         .icon {
           font-size: 20px;

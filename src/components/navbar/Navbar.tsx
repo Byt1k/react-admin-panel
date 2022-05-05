@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import './navbar.scss'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined'
@@ -8,12 +8,34 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-import {DarkModeContext} from "../../context/darkModeContext";
-import {actionsDarkMode} from "../../context/darkModeReducer";
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import {Context} from "../../context/context";
+import {actionsContext} from "../../context/reducer";
 
 export const Navbar = () => {
     // @ts-ignore
-    const {dispatch, darkMode} = useContext(DarkModeContext)
+    const { dispatch, darkMode, fullScreen } = useContext(Context)
+
+    // todo: click escape to exit fullscreen
+    useEffect(() => {
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'Escape') {
+                dispatch(actionsContext.setFullScreen(false))
+            }
+        })
+    }, [])
+
+    const toggleFullScreen = () => {
+        if (!fullScreen) {
+            document.documentElement.requestFullscreen()
+                .then(() => {
+                    dispatch(actionsContext.setFullScreen(true))
+                })
+        } else {
+            document.exitFullscreen()
+            dispatch(actionsContext.setFullScreen(false))
+        }
+    }
 
     return (
         <div className='navbar'>
@@ -27,16 +49,18 @@ export const Navbar = () => {
                         <LanguageOutlinedIcon className='icon'/>
                         English
                     </div>
-                    <div className="item">
-                        <div className='colorMode' onClick={() => dispatch(actionsDarkMode.toggleMode())}>
-                            {darkMode
-                                ? <LightModeOutlinedIcon className='icon'/>
-                                : <DarkModeOutlinedIcon className="icon"/>
-                            }
-                        </div>
+                    <div className="item" onClick={() => dispatch(actionsContext.toggleMode())}
+                         style={{cursor: 'pointer'}}>
+                        {darkMode
+                            ? <LightModeOutlinedIcon className='icon'/>
+                            : <DarkModeOutlinedIcon className="icon"/>
+                        }
                     </div>
-                    <div className="item">
-                        <FullscreenExitOutlinedIcon className='icon'/>
+                    <div className="item" onClick={toggleFullScreen} style={{cursor: 'pointer'}}>
+                        {fullScreen
+                            ? <FullscreenExitOutlinedIcon className='icon'/>
+                            : <FullscreenIcon className='icon'/>
+                        }
                     </div>
                     <div className="item">
                         <NotificationsNoneOutlinedIcon className='icon'/>
