@@ -1,6 +1,6 @@
 import './datatable.scss'
 import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
-import {userColumns, userRows} from "../../datatablesource";
+import {userColumns, userRows} from "../../datatableSource";
 
 export const Datatable = () => {
     const actionColumn: GridColDef[] = [{
