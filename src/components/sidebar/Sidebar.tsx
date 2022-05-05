@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './sidebar.scss'
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
@@ -12,30 +12,43 @@ import TerminalOutlinedIcon from '@mui/icons-material/TerminalOutlined'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
-
+import {Link} from "react-router-dom";
+import {DarkModeContext} from "../../context/darkModeContext";
+import {actionsDarkMode} from "../../context/darkModeReducer";
 
 export const Sidebar = () => {
+    // @ts-ignore
+    const {dispatch} = useContext(DarkModeContext)
+
     return (
         <div className='sidebar'>
             <div className='top'>
-                <span className='logo'>AdminPanel</span>
+                <Link to='/'>
+                    <span className='logo'>AdminPanel</span>
+                </Link>
             </div>
             <div className='center'>
                 <ul>
                     <p className='title'>MAIN</p>
-                    <li>
-                        <DashboardOutlinedIcon className='icon'/>
-                        <span>Dashboard</span>
-                    </li>
+                    <Link to='/'>
+                        <li>
+                            <DashboardOutlinedIcon className='icon'/>
+                            <span>Dashboard</span>
+                        </li>
+                    </Link>
                     <p className='title'>LISTS</p>
-                    <li>
-                        <PersonOutlineOutlinedIcon className='icon'/>
-                        <span>Users</span>
-                    </li>
-                    <li>
-                        <Inventory2OutlinedIcon className='icon'/>
-                        <span>Products</span>
-                    </li>
+                    <Link to='/users'>
+                        <li>
+                            <PersonOutlineOutlinedIcon className='icon'/>
+                            <span>Users</span>
+                        </li>
+                    </Link>
+                    <Link to='/products'>
+                        <li>
+                            <Inventory2OutlinedIcon className='icon'/>
+                            <span>Products</span>
+                        </li>
+                    </Link>
                     <li>
                         <CreditCardOutlinedIcon className='icon'/>
                         <span>Orders</span>
@@ -78,8 +91,8 @@ export const Sidebar = () => {
                 </ul>
             </div>
             <div className='bottom'>
-                <div className="colorOption"></div>
-                <div className="colorOption"></div>
+                <div className="colorOption" onClick={() => dispatch(actionsDarkMode.setLightMode())} />
+                <div className="colorOption" onClick={() => dispatch(actionsDarkMode.setDarkMode())} />
             </div>
         </div>
     )

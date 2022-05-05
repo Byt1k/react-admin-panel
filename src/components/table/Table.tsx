@@ -81,7 +81,7 @@ export const CustomTable = () => {
                             <TableCell className='tableCell'>{row.id}</TableCell>
                             <TableCell className='tableCell'>
                                 <div className="cellWrapper">
-                                    <img src={row.img} alt="image" className="image"/>
+                                    <img src={row.img} alt="product" className="image"/>
                                     {row.product}
                                 </div>
                             </TableCell>
