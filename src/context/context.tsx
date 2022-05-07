@@ -1,6 +1,5 @@
 import {createContext, Dispatch, PropsWithChildren, useReducer} from "react";
 import {ActionsType, reducer} from "./reducer";
-import {FullScreenHandle, useFullScreenHandle} from "react-full-screen";
 
 const InitialState = {
     darkMode: false,

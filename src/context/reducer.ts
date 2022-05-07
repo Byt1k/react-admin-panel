@@ -1,6 +1,5 @@
 import {InitialStateType} from "./context";
 import {InferValuesType} from "../types/types";
-import {debug} from "util";
 
 export const reducer = (state: InitialStateType, action: ActionsType): InitialStateType => {
     switch (action.type) {
